@@ -17,6 +17,8 @@ export default function useListenMessages() {
       setMessage(newMessage);
     });
 
-    return () => socket?.off("newMessage");
+    return () => {
+      socket?.off("newMessage");
+    };
   }, [socket, setMessage]);
 }

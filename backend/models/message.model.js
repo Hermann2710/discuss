@@ -1,5 +1,6 @@
 import { Schema, model } from "mongoose";
 import Conversation from "./conversation.model.js";
+import { getReceiverSocketId, io } from "../socket/socket.js";
 
 const messageSchema = new Schema(
   {
@@ -51,6 +52,11 @@ messageSchema.statics.sendMessage = async function (data) {
         });
 
         // SOCKET IO FUNCTIONALITY WILL GO HERE
+        const receiverSocketId = getReceiverSocketId(receiverId);
+        if(receiverSocketId) {
+          // io.to(<socket_id>).emit() used to send events to specific client
+          io.to(receiverSocketId).emit("newMessage", created);
+        }
 
         return created;
       }

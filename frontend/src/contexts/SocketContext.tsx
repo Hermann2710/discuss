@@ -38,7 +38,9 @@ export default function SocketContextProvider(props: PropsWithChildren) {
         setOnlineUsers(users);
       });
 
-      return () => socket.close();
+      return () => {
+        socket.close();
+      };
     } else {
       if (socket) {
         socket.close();
