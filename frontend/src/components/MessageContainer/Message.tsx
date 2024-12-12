@@ -17,6 +17,8 @@ export default function Message({ message }: Props) {
     ? authUser?.profilePic
     : selectedConversation?.profilePic;
   const bubbleBgColor = fromMe ? "chat-bubble-primary" : "";
+  
+  const shakeClass = message.shouldShake ? "shake" : "";
 
   return (
     <div className={`chat ${chatClassName}`}>
@@ -25,7 +27,9 @@ export default function Message({ message }: Props) {
           <img src={profilePic || "/vite.svg"} alt="user avatar" />
         </div>
       </div>
-      <div className={`chat-bubble ${bubbleBgColor}`}>{message.message}</div>
+      <div className={`chat-bubble ${bubbleBgColor} ${shakeClass}`}>
+        {message.message}
+      </div>
       <div className="chat-footer opacity-50 text-xs flex gap-1 items-center">
         {extractTime(message.createdAt!)}
       </div>
