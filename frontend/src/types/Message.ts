@@ -5,5 +5,5 @@ export default interface Message {
   message?: string;
   createdAt?: string;
   updatedAt?: string;
-  shouldShake: boolean;
+  shouldShake?: boolean;
 }

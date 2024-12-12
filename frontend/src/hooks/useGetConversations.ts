@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import Conversation from "../types/Conversation";
 import User from "../types/User";
 
 export default function useGetConversations() {
