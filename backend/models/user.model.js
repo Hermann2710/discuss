@@ -48,7 +48,7 @@ userSchema.statics.register = async function (data) {
     if (exist) {
       throw new Error("The user already exists");
     } else {
-      const hashedPassword = hash(password, salt);
+      const hashedPassword = await hash(password, salt);
       const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
       const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`;
 
