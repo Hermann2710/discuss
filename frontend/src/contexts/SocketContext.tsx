@@ -26,7 +26,7 @@ export default function SocketContextProvider(props: PropsWithChildren) {
 
   useEffect(() => {
     if (authUser) {
-      const socket = io("http://localhost:3500", {
+      const socket = io("https://discuss-b4j7.onrender.com", {
         query: {
           userId: authUser._id,
         },
