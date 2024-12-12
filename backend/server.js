@@ -1,6 +1,5 @@
 import { config } from "dotenv";
 import express from "express";
-import cors from "cors";
 import cookieParser from "cookie-parser";
 import path from "path";
 
@@ -18,7 +17,6 @@ const __dirname = path.resolve();
 
 config();
 app.use(express.json());
-app.use(cors());
 app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
