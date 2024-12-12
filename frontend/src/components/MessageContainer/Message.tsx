@@ -23,7 +23,7 @@ export default function Message({ message }: Props) {
   return (
     <div className={`chat ${chatClassName}`}>
       <div className="chat-image avatar">
-        <div className="w-10-rounded-full">
+        <div className="w-10 rounded-full">
           <img src={profilePic || "/vite.svg"} alt="user avatar" />
         </div>
       </div>
