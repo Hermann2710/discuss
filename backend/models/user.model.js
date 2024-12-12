@@ -3,31 +3,34 @@ import { hash, compare } from "bcrypt";
 
 const salt = parseInt(process.env.SALT || 10);
 
-const userSchema = new Schema({
-  fullName: {
-    type: String,
-    required: true,
+const userSchema = new Schema(
+  {
+    fullName: {
+      type: String,
+      required: true,
+    },
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+      minlenght: 6,
+    },
+    gender: {
+      type: String,
+      required: true,
+      enum: ["male", "female"],
+    },
+    profilePic: {
+      type: String,
+      default: "",
+    },
   },
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-    minlenght: 6,
-  },
-  gender: {
-    type: String,
-    required: true,
-    enum: ["male", "female"],
-  },
-  profilePic: {
-    type: String,
-    default: "",
-  },
-}, { timestamps: true });
+  { timestamps: true }
+);
 
 userSchema.statics.register = async function (data) {
   try {
@@ -45,14 +48,18 @@ userSchema.statics.register = async function (data) {
     if (exist) {
       throw new Error("The user already exists");
     } else {
-      const hashed = await hash(password, salt);
-      const user = await this.create({
+      const hashedPassword = hash(password, salt);
+      const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
+      const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`;
+
+      const newUser = new User({
         fullName,
         username,
-        password: hashed,
+        password: hashedPassword,
         gender,
+        profilePic: gender === "male" ? boyProfilePic : girlProfilePic,
       });
-      return user;
+      return newUser;
     }
   } catch (error) {
     throw new Error(error.message);
