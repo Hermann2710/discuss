@@ -52,7 +52,7 @@ userSchema.statics.register = async function (data) {
       const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
       const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`;
 
-      const newUser = new User({
+      const newUser = await this.create({
         fullName,
         username,
         password: hashedPassword,
