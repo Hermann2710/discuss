@@ -13,12 +13,6 @@ export default function LogoutButton() {
       ) : (
         <span className="loading loading-spinner"></span>
       )}
-
-      <div className="avatar">
-        <div className="w-12">
-          <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-        </div>
-      </div>
     </div>
   );
 }
